@@ -41,7 +41,7 @@ def line_parser(line):
        fields.append(line[beg:end].strip())
    return fields
 
-# six digits - first one is unkown, next two are AD, next two are ED
+# six digits - first one is unknown, next two are AD, next two are ED
 
 
 with open('../Election results/August2022PRI.ASC', 'r') as asc_file:
