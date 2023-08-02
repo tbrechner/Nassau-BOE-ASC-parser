@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 asc_directory = ""
-csv_directory = ""
+csv_directory = "" # make sure there is a slash at the end
 entire_file = []
 fields_of_file = []
 contests = []
@@ -58,6 +58,7 @@ for field_definition in field_definitons[:4]: # gets rid of leading zeroes in fi
 
 dfs = dict(tuple(fields_table.groupby('Contest number')))
 
-os.mkdir(csv_directory)
+if not os.path.exists(csv_directory + "election_results/"):
+    os.mkdir(csv_directory + "election_results/")
 for contest in dfs:
-    dfs[contest].to_csv(csv_directory + fields_table.loc[fields_table["Contest number"] == contest, 'Contest title'].iloc[0] + ".csv")
+    dfs[contest].to_csv(csv_directory + "election_results/" + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
