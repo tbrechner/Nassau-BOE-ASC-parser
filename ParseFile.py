@@ -3,8 +3,8 @@ import copy
 import pandas as pd
 import os
 
-asc_directory = "/Users/tbrec/Documents/DSA work/Electoral/BOE Files/Election results/August2022PRI.ASC"
-csv_directory = "/Users/tbrec/Documents/DSA work/Electoral/BOE Files/" + "election_results/"
+asc_directory = ""
+csv_directory = ""
 entire_file = []
 fields_of_file = []
 contests = []
@@ -61,4 +61,3 @@ dfs = dict(tuple(fields_table.groupby('Contest number')))
 os.mkdir(csv_directory)
 for contest in dfs:
     dfs[contest].to_csv(csv_directory + fields_table.loc[fields_table["Contest number"] == contest, 'Contest title'].iloc[0] + ".csv")
-
