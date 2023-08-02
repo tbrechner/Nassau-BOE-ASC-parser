@@ -1,12 +1,14 @@
 import csv
 import copy
-from IPython.display import display
 import pandas as pd
+import os
 
+asc_directory = "/Users/tbrec/Documents/DSA work/Electoral/BOE Files/Election results/August2022PRI.ASC"
+csv_directory = "/Users/tbrec/Documents/DSA work/Electoral/BOE Files/" + "election_results/"
 entire_file = []
 fields_of_file = []
 contests = []
-dateOfElection = "08-23-2022" # format however you want - i like MM-DD-YYYY
+
 
 field_definitons = [
     "Contest number",
@@ -41,32 +43,22 @@ def line_parser(line):
        fields.append(line[beg:end].strip())
    return fields
 
-# six digits - first one is unknown, next two are AD, next two are ED
-
-
-with open('../Election results/August2022PRI.ASC', 'r') as asc_file:
+with open(asc_directory, 'r') as asc_file:
     entire_file = asc_file.readlines() # split ascii files in list of strings where each string is a line
 
 for line in entire_file: # turn string of line --> list of substrings in line based on defined character placement in PDF (Election results/ASCII File Specs Preinct Detail Text No Groups.pdf)
     fields_of_file.append(line_parser(line))
 
 
-
-
-
-print(fields_of_file)
-
-
 fields_table = pd.DataFrame(fields_of_file, columns = field_definitons)
 
-print(fields_table.columns)
+for field_definition in field_definitons[:4]: # gets rid of leading zeroes in first four columns that can occur, note that columns with just zeroes in them will appear blank now
+    fields_table[field_definition] = fields_table[field_definition].str.replace(r'^0+(\d*)$', r'\1', regex=True)
+
 
 dfs = dict(tuple(fields_table.groupby('Contest number')))
 
+os.mkdir(csv_directory)
 for contest in dfs:
-    dfs[contest].to_csv("/Users/tbrec/Documents/DSA work/Electoral/BOE Files/" + contest + "test.csv")
-
-        
-with open('DELETEWHENCOMPLETED.txt', 'w') as f:
-    f.write('\n'.join(','.join(str(i) for i in x) for x in fields_of_file))
+    dfs[contest].to_csv(csv_directory + fields_table.loc[fields_table["Contest number"] == contest, 'Contest title'].iloc[0] + ".csv")
 
