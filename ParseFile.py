@@ -4,7 +4,8 @@ import pandas as pd
 import os
 
 asc_directory = "Election results/GEN2022.ASC"
-csv_directory = "/Users/tbrec/Documents/DSA work/Electoral/BOE Files/" # make sure there is a slash at the end
+csv_directory = "/Users/tbrec/Documents/DSA/Electoral/BOE Files/" # make sure there is a slash at the end
+is_primary = True # make sure to change or else there will be issues if there is more than party primary for the same race, it is possible to do this automatically by seeing if the string "PRI" is in the directory, but then this won't work if the BOE doesn't include that substring, so I'm not implemented that way b/c I will forgot that I did it, and then wonder why my code doesn't work
 entire_file = []
 fields_of_file = []
 contests = []
@@ -22,7 +23,7 @@ field_definitions = [
     "Contest title",
     "Candidate name",
     "Precinct name",
-    # "District name", # This may be referred to as a district on some mapping websites. On Datawrapper, make sure to use the DISTRICt option instead of ID and to use this value.
+    # "District name", # This may be referred to as a district on some mapping websites. On Datawrapper, make sure to use the DISTRICT option instead of ID and to use this value.
     "Town",
     "AD",
     "ED"
@@ -73,6 +74,7 @@ for contest in dfs:
     if len(candidate_tables) > 1 and superior_formatting:
         for candidate in candidate_tables:
             new_column_name = candidate_tables[candidate]["Candidate name"].iloc[0] + " votes"
+            print(new_column_name)
             candidate_tables[candidate].rename(columns = {'Number of registered voters or number of voters':new_column_name}, inplace = True)
             candidate_tables[candidate].reset_index(drop=True, inplace=True)
         superior_table = pd.concat(candidate_tables, axis = 1)
@@ -94,9 +96,14 @@ for contest in dfs:
         candidate_tables.popitem() 
 
         for candidate in candidate_tables:
-            superior_table[candidate_tables[candidate]["Candidate name"].iloc[0] + " pct"] = superior_table[candidate_tables[candidate]["Candidate name"].iloc[0] + " votes"].astype(int) / superior_table["Total votes"] * 100
+            superior_table[candidate_tables[candidate]["Candidate name"].iloc[0] + " pct"] = superior_table[candidate_tables[candidate]["Candidate name"].iloc[0] + " votes"].astype(int) / superior_table["Total votes"]
 
-        superior_table.to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
-
+        if is_primary:
+            superior_table.to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Party code"].iloc[0] + " " + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
+        else:
+            superior_table.to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
     else:
-        dfs[contest].to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
+        if is_primary:
+            dfs[contest].to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Party code"].iloc[0] + " " + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
+        else:
+            dfs[contest].to_csv(results_directory + fields_table.loc[fields_table["Contest number"] == contest, "Contest title"].iloc[0] + ".csv")
