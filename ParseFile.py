@@ -3,8 +3,8 @@ import copy
 import pandas as pd
 import os
 
-asc_directory = "Election results/GEN2022.ASC"
-csv_directory = "/Users/tbrec/Documents/DSA/Electoral/BOE Files/" # make sure there is a slash at the end
+asc_directory = ""
+csv_directory = "" # make sure there is a slash at the end
 is_primary = True # make sure to change or else there will be issues if there is more than party primary for the same race, it is possible to do this automatically by seeing if the string "PRI" is in the directory, but then this won't work if the BOE doesn't include that substring, so I'm not implemented that way b/c I will forgot that I did it, and then wonder why my code doesn't work
 entire_file = []
 fields_of_file = []
