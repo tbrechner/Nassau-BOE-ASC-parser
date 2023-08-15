@@ -6,11 +6,11 @@ import os
 asc_directory = ""
 csv_directory = "" # make sure there is a slash at the end
 is_primary = True # make sure to change or else there will be issues if there is more than party primary for the same race, it is possible to do this automatically by seeing if the string "PRI" is in the directory, but then this won't work if the BOE doesn't include that substring, so I'm not implemented that way b/c I will forgot that I did it, and then wonder why my code doesn't work
+superior_formatting = True # true makes data suitable for making choropleths, also gets rid of over and under votes. false just takes the ASC and does an almost direct conversion to an CSV.
+
 entire_file = []
 fields_of_file = []
 contests = []
-superior_formatting = False # true makes data suitable for making choropleths, also gets rid of over and under votes. false just takes the ASC and does an almost direct conversion to an CSV.
-
 
 field_definitions = [
     "Contest number",
@@ -62,12 +62,12 @@ fields_table = pd.DataFrame(fields_of_file, columns = field_definitions)
 for field_definition in field_definitions[:4] + field_definitions[:-2]: # gets rid of leading zeroes in first four columns and last two that can occur, note that columns with just zeroes in them will appear blank now
     fields_table[field_definition] = fields_table[field_definition].str.replace(r'^0+(\d*)$', r'\1', regex=True)
 
-results_directory = csv_directory + "Election results/" + os.path.basename(asc_directory[:-4]) + "/"
+results_directory = csv_directory + "/Election results/" + os.path.basename(asc_directory[:-4]) + "/"
 
 dfs = dict(tuple(fields_table.groupby('Contest number')))
 
 if not os.path.exists(results_directory):
-    os.mkdir(results_directory)
+    os.makedirs(results_directory)
 
 for contest in dfs:
     candidate_tables = dict(tuple(dfs[contest].groupby('Candidate number')))
