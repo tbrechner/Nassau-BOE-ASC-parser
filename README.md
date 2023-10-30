@@ -27,5 +27,3 @@ superior_formatting = True
 3. Run the code on your IDE or in the Terminal. FYI, I used Python 3.11, but it may work for earlier versions too. Create an issue on this GitHub if you run into any errors.
 
 4. If you are making a map, do not the `ID` criteria to differentiate the precincts. Use the `DISTRICT` criteria—it is linked the `Precinct name` field in the CSV file. Do not use the `Precinct code` field for this purpose (or do, I just can't figure how to use it with the maps I have).
-
-5. Send me any shapefiles, GeoJSONs, etc. you use please. I am in desperate need of them for Nassau County, NY. I'll open source them if that is okay with you.
