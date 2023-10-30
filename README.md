@@ -1,6 +1,6 @@
 # Nassau BOE ASC parser
 
-The Nassau County Board of Elections sucks. They barely ever respond to FOIAs, and when they do, they are nothing short of intentionally incompetent. When you ask for simple elections data by precinct they provide these horrible .ASC files that can drive you mad figuring them out even though the manual for their voting machine says they can provide CSVs. Thankfully, I have automated the process in converting them to readable CSV files.
+The Nassau County Board of Elections provides election data in the form of hard to read .asc files. This Python scripts converts them to CSV files.
 
 Make sure to configure the `asc_directory` and `csv_directory` variables with relevant paths on your computer. Also, this parser requires the Python library pandas.
 
