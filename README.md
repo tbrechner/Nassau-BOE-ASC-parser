@@ -1,6 +1,10 @@
 # Nassau BOE ASC parser
 
-The Nassau County Board of Elections provides election data in the form of hard to read .asc files. This Python scripts converts them to CSV files.
+# Data Visualizations
+
+Utilizing the files I parsed, I created [this](https://public.tableau.com/shared/Q7X69RX7F?:display_count=n&:origin=viz_share_link) visualization of results from an August 2022 NY state senate district 7 primary election using Tableau. I also created visualizations on Datawrapper for [an August 2022 NY gubernatorial primary](https://datawrapper.dwcdn.net/7pWT3/5/), [an August 2022 NY Congressional district 3 primary](https://datawrapper.dwcdn.net/fjA27/5/), and [an August 2022 NY state senate district 7 primary](https://datawrapper.dwcdn.net/h3b3e/14/).
+
+The Nassau County Board of Elections provides election data in the form of hard-to-read .asc files. This Python script converts them to CSV files.
 
 Make sure to configure the `asc_directory` and `csv_directory` variables with relevant paths on your computer. Also, this parser requires the Python library pandas.
 
