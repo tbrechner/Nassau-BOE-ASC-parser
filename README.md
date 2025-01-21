@@ -2,7 +2,7 @@
 
 # Data Visualizations
 
-Utilizing the files I parsed, I created [this](https://public.tableau.com/shared/Q7X69RX7F?:display_count=n&:origin=viz_share_link) visualization of results from an August 2022 NY state senate district 7 primary election using Tableau. I also created visualizations on Datawrapper for [an August 2022 NY gubernatorial primary](https://datawrapper.dwcdn.net/7pWT3/5/), [an August 2022 NY Congressional district 3 primary](https://datawrapper.dwcdn.net/fjA27/5/), and [an August 2022 NY state senate district 7 primary](https://datawrapper.dwcdn.net/h3b3e/14/).
+Utilizing the files I parsed, I created [this](https://public.tableau.com/shared/Q7X69RX7F?:display_count=n&:origin=viz_share_link) visualization of results from an August 2022 NY state senate district 7 primary election using Tableau. I also created visualizations on Datawrapper for [an August 2022 NY gubernatorial primary](https://datawrapper.dwcdn.net/7pWT3/6/), [an August 2022 NY Congressional district 3 primary](https://datawrapper.dwcdn.net/fjA27/6/), and [an August 2022 NY state senate district 7 primary](https://datawrapper.dwcdn.net/h3b3e/15/).
 
 The Nassau County Board of Elections provides election data in the form of hard-to-read .asc files. This Python script converts them to CSV files.
 
